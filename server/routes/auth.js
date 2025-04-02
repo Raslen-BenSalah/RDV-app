@@ -39,6 +39,11 @@ router.post('/register', [
     }
 });
 
+// Show Register Page
+router.get('/register', (req, res) => {
+    res.render('auth/register', { title: 'Register' });
+});
+
 // User Login
 router.post('/login', [
     body('email').isEmail().withMessage('Invalid email'),
@@ -66,6 +71,10 @@ router.post('/login', [
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
+});
+
+router.get('/login', (req, res) => {
+    res.render('auth/login', { title: 'Login' });
 });
 
 // Get Authenticated User
