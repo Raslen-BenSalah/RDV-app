@@ -5,12 +5,17 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
 
+
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+const authRoutes = require('./server/routes/auth');
+app.use('/auth', authRoutes);
+
 
 // Session
 app.use(session({
@@ -35,3 +40,5 @@ app.use('/', mainRoutes);
 // Start Server
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+console.log('JWT Secret Key:', process.env.JWT_SECRET);
