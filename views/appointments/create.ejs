@@ -1,0 +1,18 @@
+<%- include('../layouts/main') %>
+
+<div class="container">
+    <h2>Book an Appointment</h2>
+    <form action="/appointments/create" method="POST">
+        <label for="professionalId">Select Professional:</label>
+        <select name="professionalId" required>
+            <% professionals.forEach(pro => { %>
+                <option value="<%= pro._id %>"><%= pro.name %> - <%= pro.email %></option>
+            <% }) %>
+        </select>
+        
+        <label for="date">Choose Date:</label>
+        <input type="datetime-local" name="date" required>
+        
+        <button type="submit">Book</button>
+    </form>
+</div>

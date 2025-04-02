@@ -1,0 +1,21 @@
+<%- include('../layouts/main') %>
+
+<div class="container">
+    <h2>My Appointments</h2>
+    <a href="/appointments/create">Create New Appointment</a>
+
+    <ul>
+        <% appointments.forEach(appointment => { %>
+            <li>
+                <strong>Date:</strong> <%= appointment.date.toDateString() %> | 
+                <strong>Professional:</strong> <%= appointment.professional.name %> |
+                <strong>Status:</strong> <%= appointment.status %> 
+                
+                <a href="/appointments/edit/<%= appointment._id %>">Edit</a>
+                <form action="/appointments/delete/<%= appointment._id %>" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+</div>

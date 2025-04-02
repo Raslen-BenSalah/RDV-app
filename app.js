@@ -42,8 +42,10 @@ mongoose.connect(process.env.MONGO_URI)
 // ✅ Routes
 const authRoutes = require('./server/routes/auth');
 const mainRoutes = require('./server/routes/main');
+const appointmentRoutes = require('./server/routes/appointment');
 
 app.use('/auth', authRoutes);
+app.use('/appointments', appointmentRoutes);
 app.use('/', mainRoutes);
 
 // ✅ Start Server

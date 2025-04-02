@@ -1,0 +1,10 @@
+<%- include('../layouts/main') %>
+
+<div class="container">
+    <h2>Edit Appointment</h2>
+    <form action="/appointments/edit/<%= appointment._id %>" method="POST">
+        <label for="date">New Date:</label>
+        <input type="datetime-local" name="date" value="<%= appointment.date.toISOString().slice(0,16) %>" required>
+        <button type="submit">Update</button>
+    </form>
+</div>
