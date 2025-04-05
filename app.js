@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -20,6 +21,7 @@ if (!process.env.MONGO_URI) {
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
 
 // ✅ Session (must be before routes)
 app.use(session({
@@ -43,10 +45,14 @@ mongoose.connect(process.env.MONGO_URI)
 const authRoutes = require('./server/routes/auth');
 const mainRoutes = require('./server/routes/main');
 const appointmentRoutes = require('./server/routes/appointment');
+const professionalRoutes = require('./server/routes/professional');
+
 
 app.use('/auth', authRoutes);
 app.use('/appointments', appointmentRoutes);
 app.use('/', mainRoutes);
+app.use('/professionals', professionalRoutes);
+
 
 // ✅ Start Server
 const PORT = process.env.PORT || 5001;

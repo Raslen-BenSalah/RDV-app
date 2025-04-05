@@ -1,0 +1,24 @@
+<%- include('../layouts/main') %>
+
+<div class="container mt-4">
+    <h2>Available Professionals</h2>
+
+    <% if (professionals.length === 0) { %>
+        <p>No professionals found.</p>
+    <% } else { %>
+        <div class="row">
+            <% professionals.forEach(pro => { %>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= pro.name %></h5>
+                            <p class="card-text"><%= pro.profession %></p>
+                            <p class="card-text"><%= pro.email %></p>
+                            <a href="/appointments/create?professionalId=<%= pro._id %>" class="btn btn-primary">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>

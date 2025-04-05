@@ -1,16 +1,44 @@
 <%- include('../layouts/main') %>
 
-<div class="container">
+<div class="container mt-5">
     <h2>Register</h2>
     <form action="/auth/register" method="POST">
-        <input type="text" name="name" placeholder="Full Name" required />
-        <input type="email" name="email" placeholder="Email" required />
-        <input type="password" name="password" placeholder="Password" required />
-        <select name="role">
-            <option value="client">Client</option>
-            <option value="professional">Professional</option>
-        </select>
-        <button type="submit">Register</button>
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" name="name" class="form-control" required />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" required />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" required />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="role">Register As</label>
+            <select name="role" class="form-control" required onchange="toggleProfessionField(this.value)">
+                <option value="">-- Select Role --</option>
+                <option value="client">Client</option>
+                <option value="professional">Professional</option>
+            </select>
+        </div>
+
+        <div class="form-group mt-3" id="professionField" style="display: none;">
+            <label for="profession">Your Profession</label>
+            <input type="text" name="profession" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Register</button>
     </form>
-    <p>Already have an account? <a href="/auth/login">Login here</a></p>
 </div>
+
+<script>
+    function toggleProfessionField(role) {
+        const field = document.getElementById('professionField');
+        field.style.display = role === 'professional' ? 'block' : 'none';
+    }
+</script>
